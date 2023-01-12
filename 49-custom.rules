@@ -1,0 +1,8 @@
+KERNEL=="ttyUSB*", KERNELS=="1-2.1.1:1.0", SYMLINK="right_robot_board_serial_socket"
+KERNEL=="ttyUSB*", KERNELS=="1-2.1.2:1.0", SYMLINK="electronic_compass_0"
+KERNEL=="ttyUSB*", KERNELS=="1-2.1.3:1.0", SYMLINK="sensor_2"
+KERNEL=="ttyUSB*", KERNELS=="1-2.1.4:1.0", SYMLINK="sensor_3"
+KERNEL=="ttyUSB*", KERNELS=="1-2.2.1:1.0", SYMLINK="rflex_0"
+KERNEL=="ttyUSB*", KERNELS=="1-2.2.2:1.0", SYMLINK="laser_0"
+KERNEL=="ttyUSB*", KERNELS=="1-2.2.3:1.0", SYMLINK="camera_0"
+KERNEL=="ttyUSB*", KERNELS=="1-2.2.4:1.0", SYMLINK="external_sp_0"

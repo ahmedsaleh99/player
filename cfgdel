@@ -1,0 +1,155 @@
+ 
+# configuration file to ATRV-Mini
+# tells player which drivers to load
+
+driver
+(
+  name "rflex"
+  provides ["position2d:0" "sonar:0" "bank2:::sonar:1" "power:0"]
+    rflex_serial_port "/dev/rflex_0"
+    m_length .630
+    m_width .540
+    odo_distance_conversion 181818.1818		#experimentally determined 10/25/2010 for ATRVmini!
+    odo_angle_conversion 64501.69726		#70500
+    default_trans_acceleration 1000.0 		#1000.0
+    default_rot_acceleration 700.0		#700.0    
+
+    range_distance_conversion 1.55
+    sonar_age 1
+    #sonar_echo_delay 3000
+    #sonar_ping_delay 0
+    #sonar_set_delay 0
+    #max_num_sonars 16
+    max_num_sonars 64
+    num_sonars 16
+    num_sonar_banks 2
+    num_sonars_possible_per_bank 16
+    num_sonars_in_bank [8 8]
+  mrad_sonar_poses [0.000000 0258.170 0114.700 0.314159 0252.240 0152.170 0.628318 0235.010 0185.980 0.942478 0208.190 0212.810 1.256637 0174.380 0230.030 1.570796 0136.910 0235.970 1.570796 -228.17 235.97 3.141592 -258.17 205.97 0.000000 0258.170 -0114.700 -0.314159 0252.240 -0152.170 -0.628318 0235.010 -0185.980 -0.942478 0208.190 -0212.810 -1.256637 0174.380 -0230.030 -1.570796 0136.910 -0235.970 -1.570796 -228.17 -235.97 -3.141592 -258.17 -205.97]
+    pose_count 0
+
+    rflex_power_offset	1.1 #volts
+
+)
+
+driver
+(
+  name "sonyevid30"
+  provides ["ptz:0"]
+  port "/dev/camera_0"
+)
+
+driver
+(
+  name "camerav4l2"
+#name "cameraUVC" 
+ provides ["camera:0"]
+settle_time 0.001
+buffers 2
+size [300 200]
+#size [160 120]
+ # port "/dev/video0"
+  #source 0
+#  size [640 480]	#do not change this value! it's essential!
+ # norm "ntsc"
+# mode "RGB888"
+ #mode "JPEG"
+#save 0
+#have_ov519 0
+#max_buffer -1
+#read_mode 0
+##publish_interval 0
+#sleep_nsec 10000000
+#alwayson 1
+)
+
+#driver
+#(
+#  name "cameracompress"
+#  requires ["camera:0"]
+#  provides ["camera:1"]
+#)
+
+#driver
+#(
+#  name "camfilter"
+#  requires ["camera:1"]
+#  provides ["camera:2"]
+  #max_color_only 1
+  #r_min 255
+  #g_min 255
+  #b_min 0
+  #grey_min (integer)
+  #r_max 255
+  #g_max 255
+  #b_max 255
+  #grey_max (integer)
+
+  #r_above 0
+  #g_above 0
+  #b_above 0
+  #grey_above (integer)
+
+  #r_below 0
+  #g_below 0
+  #b_below 0
+  #grey_below (integer)
+
+  #r_passed 255
+  #g_passed 128
+  #b_passed 128
+#  grey_passed -2
+#)
+
+#driver
+#(
+#  name "cmvision"
+#  provides ["blobfinder:0"]
+#  requires ["camera:1"]
+#  colorfile "blueBlobs.txt"
+#)
+
+#driver
+#(
+#  name "artoolkitplus"
+#  requires ["camera:1"]
+#  provides ["blobfinder:1"]
+#)
+
+driver
+(
+  name "sicklms200"
+  provides ["laser:0"]
+  port "/dev/laser_0"
+  serial_high_speed_mode 1
+  serial_high_speed_baudremap 230400
+  connect_rate [9600 500000 38400]
+  transfer_rate 38400
+  resolution 100
+  range_res 1
+  retry 2
+  alwayson 1
+)
+
+driver
+(
+  name "lasercspace"
+  requires ["laser:0"]
+  provides ["laser:1"]
+  radius 0.5
+)
+
+#driver
+#(
+#  name "vfh"
+#  requires ["position2d:1" "laser:0"]
+#  provides ["position2d:0"]
+#)
+
+driver
+(
+  name "festival"
+  provides ["speech:0"]
+  libdir "/usr/bin/festival_server"
+)
+
